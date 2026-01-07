@@ -30,6 +30,10 @@ export default class MCPClient {
     return this.tools;
   }
 
+  public async callTool(name: string, params: any) {
+    return await this.mcp.callTool({ name, arguments: params });
+  }
+
   private async connectToServer() {
     try {
       this.transport = new StdioClientTransport({
