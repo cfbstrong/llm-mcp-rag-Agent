@@ -114,7 +114,11 @@ export default class ChatOpenAI {
   private getToolDefinition() {
     return this.tools.map((tool) => ({
       type: "function" as const,
-      function: tool,
+      function: {
+        name: tool.name,
+        description: tool.description,
+        parameters: tool.inputSchema,
+      },
     }));
   }
 }
