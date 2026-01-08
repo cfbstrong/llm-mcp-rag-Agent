@@ -26,7 +26,7 @@ export default class EmbeddingRetrivers {
   private async embed(document: string): Promise<number[]> {
     //将文本转换为向量
     const response = await fetch(
-      `${process.env.EMBEDDING_BASE_URL}/embedding`,
+      `${process.env.EMBEDDING_BASE_URL}/embeddings`,
       {
         method: "POST",
         headers: {
