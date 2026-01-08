@@ -14,7 +14,7 @@ export default class VectorStore {
     this.VectorStore.push(item); // 将项目添加到items数组的末尾
   }
 
-  search(queryEmbeddings: number[], k: number): VectorStoreItem[] {
+  async search(queryEmbeddings: number[], k: number): Promise<string[]> {
     const scored = this.VectorStore.map((item) => {
       const score = this._calculateCosineSimilarity(
         queryEmbeddings,
@@ -22,7 +22,10 @@ export default class VectorStore {
       );
       return { ...item, score };
     });
-    return scored.sort((a, b) => b.score - a.score).slice(0, k);
+    return scored
+      .sort((a, b) => b.score - a.score)
+      .slice(0, k)
+      .map((item) => item.document);
   }
 
   private _calculateCosineSimilarity(
